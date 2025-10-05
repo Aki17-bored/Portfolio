@@ -309,7 +309,7 @@ section {
   margin-bottom: 1rem;
 }
 
-/* Contact */
+/* ===== Contact Info Flex Fix ===== */
 .contact-info {
   width: 60%;
   margin: auto;
@@ -317,12 +317,16 @@ section {
   text-align: left;
 }
 .contact-info p {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between icon and text */
   margin-bottom: 1rem;
   color: #ccc;
 }
 .contact-info i {
+  flex-shrink: 0; /* prevent icon from shrinking */
   color: #b74b4b;
-  margin-right: 1rem;
+  font-size: 2rem; /* adjust icon size if needed */
 }
 .contact-info a {
   color: white;
@@ -358,80 +362,81 @@ section {
   }
 
   nav {
-position: fixed;
-  top: 0;
-  left: -100%;
-  width: 75%;
-  max-width: 280px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 2rem;
-  gap: 1.8rem;
-  transition: left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* bounce effect */
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    max-width: 280px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    gap: 1.8rem;
+    transition: left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 1000;
 
-  /* Glassmorphism */
-  background: rgba(20, 20, 30, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-right: 2px solid rgba(183, 75, 75, 0.5);
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
-}
-
-nav.active {
-  left: 0;
-  animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-nav a {
-  font-size: 1.6rem;
-  color: #fff;
-  text-decoration: none;
-  border-bottom: none;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: #b74b4b;
-}
-
-/* Overlay for mobile menu */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 20, 0.7);
-  backdrop-filter: blur(5px);
-  z-index: 999;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.overlay.active {
-  display: block;
-  opacity: 1;
-}
-
-/* Menu toggle button */
-.menu-toggle {
-  display: block;
-  cursor: pointer;
-}
-
-/* ===== Keyframe for bounce slide-in menu ===== */
-@keyframes slideIn {
-  0% {
-    transform: translateX(-100%);
+    /* Glassmorphism */
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-right: 2px solid rgba(183, 75, 75, 0.5);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
   }
-  80% {
-    transform: translateX(10%);
+
+  nav.active {
+    left: 0;
+    animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
-  100% {
-    transform: translateX(0);
+
+  nav a {
+    font-size: 1.6rem;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.3s ease;
+  }
+
+  nav a:hover {
+    color: #b74b4b;
+  }
+
+  /* Overlay for mobile menu */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 20, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Menu toggle button */
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+  }
+
+  /* ===== Keyframe for bounce slide-in menu ===== */
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+    }
+    80% {
+      transform: translateX(10%);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 }
