@@ -78,7 +78,6 @@ nav a:hover::after {
 nav a.active {
   color: #b74b4b;
 }
-
 nav a.active::after {
   width: 100%;
 }
@@ -94,15 +93,17 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8rem;
+  gap: 6rem;
   flex-wrap: wrap;
   background-color: black;
+  padding: 8rem 9% 5rem;
 }
 .home-img img {
   width: 320px;
+  max-width: 100%;
   border-radius: 50%;
   box-shadow: 0 0 35px #b74b4b;
-  transition: 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .home-img img:hover {
   transform: scale(1.05);
@@ -110,9 +111,12 @@ section {
 }
 .home-content {
   max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .home-content h1 {
-  font-size: 4.5rem;
+  font-size: clamp(3rem, 5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.3;
 }
@@ -120,11 +124,11 @@ section {
   color: #b74b4b;
 }
 .home-content h3 {
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 600;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem;
 }
+/* Typing effect */
 .typing-text span {
   color: #b74b4b;
   font-weight: 700;
@@ -143,9 +147,8 @@ section {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-
 .intro-text {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
   margin-top: 1rem;
   line-height: 1.8;
   color: #ccc;
@@ -157,7 +160,7 @@ section {
   font-style: italic;
   color: #b74b4b;
   margin-top: 0.8rem;
-  font-size: 1.7rem;
+  font-size: clamp(1.5rem, 2vw, 1.7rem);
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
@@ -220,14 +223,14 @@ section {
   padding: 1.2rem 2.5rem;
   border: 2px solid #b74b4b;
   border-radius: 2rem;
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
   font-weight: 600;
   color: #b74b4b;
   display: flex;
   align-items: center;
   gap: 1rem;
   background-color: #0f0f0f;
-  transition: 0.3s;
+  transition: all 0.3s;
 }
 .skill-box img {
   width: 35px;
@@ -248,12 +251,13 @@ section {
   margin-top: 3rem;
 }
 .project-card {
-  width: 310px;
+  flex: 1 1 310px;
+  max-width: 310px;
   padding: 2.5rem;
   border: 2px solid #b74b4b;
   border-radius: 1.5rem;
   background-color: #161616;
-  transition: 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .project-card:hover {
   transform: scale(1.05);
@@ -261,11 +265,11 @@ section {
 }
 .project-card h3 {
   color: #b74b4b;
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 3vw, 2rem);
   margin-bottom: 1rem;
 }
 .project-card p {
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 2vw, 1.5rem);
   color: #ddd;
   margin-bottom: 1rem;
 }
@@ -328,7 +332,7 @@ section {
   color: #b74b4b;
 }
 
-/* Scroll animations */
+/* ===== Scroll Reveal Animation (.slide) ===== */
 .slide {
   opacity: 0;
   transform: translateY(40px);
@@ -337,4 +341,97 @@ section {
 .slide.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Responsive Navbar + Mobile Menu */
+.menu-toggle {
+  display: none;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1rem 5%;
+  }
+
+  nav {
+position: fixed;
+  top: 0;
+  left: -100%;
+  width: 75%;
+  max-width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+  gap: 1.8rem;
+  transition: left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* bounce effect */
+  z-index: 1000;
+
+  /* Glassmorphism */
+  background: rgba(20, 20, 30, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-right: 2px solid rgba(183, 75, 75, 0.5);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+nav.active {
+  left: 0;
+  animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+nav a {
+  font-size: 1.6rem;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #b74b4b;
+}
+
+/* Overlay for mobile menu */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Menu toggle button */
+.menu-toggle {
+  display: block;
+  cursor: pointer;
+}
+
+/* ===== Keyframe for bounce slide-in menu ===== */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  80% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
